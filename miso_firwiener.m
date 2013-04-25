@@ -1,11 +1,13 @@
 function [W, R, P] = miso_firwiener(N, X, y)
 %MISO_FIRWIENER Optimal FIR Wiener filter for multiple inputs.
-%   MISO_FIRWIENER(N, X, Y) computes the optimal FIR Wiener filter of 
-%   order N, given any number of (stationary) random input signals as 
-%   the columns of matrix X, and one output signal in column vector Y.
+%   [W, R, P] = MISO_FIRWIENER(N, X, Y) computes the optimal FIR Wiener
+%   filter of order N, given any number of (stationary) random input
+%   signals as the columns of matrix X, and one output signal in column
+%   vector Y.  The output W is a matrix of FIR filter coefficients, where
+%   each row of W is a filter corresponding to the input signal in a column
+%   of X.
 
 %   Author: Keenan Pepper
-%   Last modified: 2007-12-21
 
 %   References:
 %     [1] Y. Huang, J. Benesty, and J. Chen, Acoustic MIMO Signal
@@ -44,5 +46,4 @@ P = reshape(P', [M*(N+1),1]);
 
 W = block_levinson(P, R);
 
-W = reshape(W, [M,N+1]);        % Make output compatible with earlier
-W = reshape(W', [1, M*(N+1)]);  % version.
+W = reshape(W, [M,N+1]);        
